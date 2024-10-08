@@ -2,16 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(SphereCollider))]
 [RequireComponent(typeof(BoxCollider))]
-public class SpiderBlack_Behavior : MonoBehaviour
+public class Spider_Base : MonoBehaviour
 {
-    // death script
-
     public ScreenDamage screen;
 
     public Death death;
+
+    public FollowTarget followTarget;
 
     public int damage = 2;
 
@@ -20,44 +21,57 @@ public class SpiderBlack_Behavior : MonoBehaviour
     public AudioSource spiderBite;
 
     // TIMER
- 
+
     private float timeValue = 4;
     [SerializeField] private GameObject spiderBlack;
-    
 
-    Animator anim;
-    private BoxCollider boxColliderTrigger;
-    private SphereCollider sphereCollider;
-    private NavMeshAgent navSpider;
-    private bool isDead;
-    public  bool isBiting;
+
+    protected Animator anim;
+    
+    
+    
+    protected bool isDead;
+    public bool isBiting;
 
     private GameManager gameManager;
+
+    protected BoxCollider boxColliderTrigger;
+    protected Vector3 boxCenterVector;
+    protected Vector3 boxSizeVector;
+
+    protected SphereCollider sphereCollider;
+    protected Vector3 SphCenterVector;
+    protected float SphRadius;
+
+    protected NavMeshAgent navSpider;
+    protected float navRadius;
+    protected float navSpeed;
+    protected int avPriority;
+
+    protected 
 
     // Start is called before the first frame update
 
     void OnEnable()
     {
+        timeValue = 4;
         isDead = false;
     }
-    void Start()
+    protected virtual void Start()
     {
         gameManager = GameManager.Instance;
-        death = GameObject.Find("Third Person Player 1.4").GetComponent<Death>();
-
-        screen = GameObject.Find("Canvas Screen Damage").GetComponentInChildren<ScreenDamage>();
+        death = gameManager.Death;
+        screen = gameManager.ScreenDamage;
+        followTarget = gameObject.GetComponent<FollowTarget>();
 
         // Setting components with desire values 
         // boxColliderTrigger is for recognize the player 
         boxColliderTrigger = GetComponent<BoxCollider>();
-        boxColliderTrigger.isTrigger = true;
-        boxColliderTrigger.size = new Vector3(1.5f, 1.5f, 1.5f);
-        boxColliderTrigger.center = new Vector3(0f, 0.5f, 0f);
-
+        SetBoxColliderPosition(boxColliderTrigger, boxCenterVector, boxSizeVector, true);
+        
         // sphereCollider is to push the player 
         sphereCollider = GetComponent<SphereCollider>();
-        sphereCollider.radius = 0.35f;
-        sphereCollider.center = new Vector3(0f, 0.5f, 0f);
+        SetSphereCollidersPosition(sphereCollider, SphCenterVector, SphRadius);
 
         // anim control
 
@@ -67,13 +81,8 @@ public class SpiderBlack_Behavior : MonoBehaviour
 
         navSpider = GetComponent<NavMeshAgent>();
 
-        // reduce agent radius to prevent clogging.
-
-        navSpider.radius = 0.25f;
-
-        navSpider.speed = 7.0f;
-
-        navSpider.avoidancePriority = 1;
+        SetNavAgentParameteres(navSpider, navRadius, navSpeed, avPriority);
+ 
 
         InvokeRepeating(nameof(IsAttacking), 1f, 1f);
 
@@ -82,21 +91,40 @@ public class SpiderBlack_Behavior : MonoBehaviour
     private void Update()
     {
         DeadSpiderTimer();
-        AdjustSphereCollider();        
+        AdjustMovingSphereCollider(new Vector3(0 ,0.5f, 0.1f));
     }
 
-    private void AdjustSphereCollider()
+    protected virtual void SetSphereCollidersPosition(SphereCollider sphCollider, Vector3 center, float radius)
     {
-        if (gameObject.GetComponent<FollowTarget>().isMoving == true)
-        {
-            Vector3 movingSphereCollider = new Vector3(0, 0.5f, 0.1f);
-            sphereCollider.center = movingSphereCollider;
-        }
-        
-        else { sphereCollider.center = new Vector3(0f, 0.5f, 0f); }
+        sphCollider.center = center;
+        sphCollider.radius = radius;
     }
 
-    private void IsAttacking ()
+    protected virtual void SetBoxColliderPosition(BoxCollider boxCollider, Vector3 center, Vector3 size, bool isTrigger)
+    {
+        boxCollider.isTrigger = isTrigger;
+        boxCollider.center = center;
+        boxCollider.size = size;
+    }
+
+    protected virtual void SetNavAgentParameteres(NavMeshAgent navSpider,float radius,float speed, int avPriority)
+    {
+        navSpider.radius = radius;
+        navSpider.speed = speed;
+        navSpider.avoidancePriority = avPriority;
+    }
+
+    private void AdjustMovingSphereCollider(Vector3 movingSphereCollider)
+    {
+        if (followTarget.isMoving)
+        {
+            SetSphereCollidersPosition(sphereCollider, movingSphereCollider, SphRadius);
+        }
+
+        else { SetSphereCollidersPosition(sphereCollider, SphCenterVector, SphRadius); }
+    }
+
+    private void IsAttacking()
     {
         if (isBiting)
         {
@@ -114,21 +142,17 @@ public class SpiderBlack_Behavior : MonoBehaviour
         {
             timeValue -= Time.deltaTime;
             //Debug.Log(timeValue);
-            
+
         }
         else if (isDead && timeValue <= 0)
         {
-            //timeValue = 0;
-            gameManager.SpiderManager.enemyCtr--;
-            // Debug.Log(timeValue);            
+            gameManager.SpiderManager.DecreaseEnemyCtr();
             gameObject.SetActive(false);
-            timeValue = 3;
-            isDead = false;
         }
 
-        else if (gameObject.GetComponent<FollowTarget>().LeftBehind())
+        else if (followTarget.LeftBehind())
         {
-            this.gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
 
     }
@@ -140,7 +164,7 @@ public class SpiderBlack_Behavior : MonoBehaviour
         navSpider.isStopped = true;
         sphereCollider.enabled = false;
         boxColliderTrigger.enabled = false;
-        isDead = true; 
+        isDead = true;
 
 
     }
@@ -155,7 +179,7 @@ public class SpiderBlack_Behavior : MonoBehaviour
             spiderBite.PlayOneShot(spiderBite.clip);
             anim.SetTrigger("Bite");
 
-           // Debug.Log("BITE ATTACK!");
+            // Debug.Log("BITE ATTACK!");
         }
     }
 
@@ -163,10 +187,10 @@ public class SpiderBlack_Behavior : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-           
+
             isBiting = true;
             anim.SetTrigger("Bite");
-           // Debug.Log("KEEP BITING!");
+            // Debug.Log("KEEP BITING!");
         }
     }
 
@@ -176,10 +200,9 @@ public class SpiderBlack_Behavior : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isBiting = false;
-           // Debug.Log("FOLLOW PLAYER!");
+            // Debug.Log("FOLLOW PLAYER!");
         }
     }
 
 }
-
-//https://gamedevbeginner.com/how-to-make-countdown-timer-in-unity-minutes-seconds/#:~:text=Making%20a%20countdown%20timer%20in,need%20to%20be%20calculated%20individually.
+ 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyWaves : MonoBehaviour
 {
-    //// Spawn Spiders 
+    //// Spawn Spider_Base 
     //// https://www.youtube.com/watch?v=n2DXF1ifUbU&list=PLPV2KyIb3jR4u5jX8za5iU1cqnQPmbzG0&index=7
     /// SpawnRandom [] 
     /// https://www.youtube.com/watch?v=6jJ6T8M_DcM

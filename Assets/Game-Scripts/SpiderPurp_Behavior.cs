@@ -28,10 +28,11 @@ public class SpiderPurp_Behavior : MonoBehaviour
     private bool isDead;
     public bool isBiting;
 
-
+    private GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameManager.Instance;
         death = GameObject.Find("Third Person Player 1.4").GetComponent<Death>();
         screen = GameObject.Find("Canvas Screen Damage").GetComponentInChildren<ScreenDamage>();
         // Setting components with desire values 
@@ -64,6 +65,14 @@ public class SpiderPurp_Behavior : MonoBehaviour
 
         InvokeRepeating(nameof(IsAttacking), 1f, 1f);
 
+    }
+
+    private void OnEnable()
+    {
+        timeValue = 4;
+        navSpider.isStopped = false;
+        sphereCollider.enabled = true;
+        boxColliderTrigger.enabled = true;
     }
 
     private void Update()
@@ -107,15 +116,16 @@ public class SpiderPurp_Behavior : MonoBehaviour
         }
         else if (isDead && timeValue <= 0)
         {
-            timeValue = 0;
-           // Debug.Log(timeValue);            
-            Destroy(spiderPurp);
+            
+            gameManager.SpiderManager.DecreaseEnemyCtr();
+            gameObject.SetActive(false);
+            
         }
 
-        else if (gameObject.GetComponent<FollowTarget>().LeftBehind())
-        {
-            Destroy(spiderPurp);
-        }
+        //else if (gameObject.GetComponent<FollowTarget>().LeftBehind())
+        //{
+        //    Destroy(spiderPurp);
+        //}
     }
 
 

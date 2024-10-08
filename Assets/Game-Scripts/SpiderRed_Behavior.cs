@@ -28,10 +28,12 @@ public class SpiderRed_Behavior : MonoBehaviour
     private bool isDead;
     public bool isBiting;
 
+    private GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameManager.Instance;
         death = GameObject.Find("Third Person Player 1.4").GetComponent<Death>();
         screen = GameObject.Find("Canvas Screen Damage").GetComponentInChildren<ScreenDamage>();
         // Setting components with desire values 
@@ -68,8 +70,8 @@ public class SpiderRed_Behavior : MonoBehaviour
 
     private void Update()
     {
-        DeadSpiderTimer();
-        AdjustSphereCollider();
+       DeadSpiderTimer();
+       AdjustSphereCollider();
     }
 
     private void AdjustSphereCollider()
@@ -105,15 +107,18 @@ public class SpiderRed_Behavior : MonoBehaviour
         }
         else if (isDead && timeValue <= 0)
         {
-            timeValue = 0;
-            // Debug.Log(timeValue);            
-            Destroy(spiderRed);
+            
+            // Debug.Log(timeValue);
+            gameManager.SpiderManager.enemyCtr--;
+            gameObject.SetActive(false);
+            timeValue = 3;
+            isDead = false;
         }
 
-        else if (gameObject.GetComponent<FollowTarget>().LeftBehind())
-        {
-            Destroy(spiderRed);
-        }
+        //else if (gameObject.GetComponent<FollowTarget>().LeftBehind())
+        //{
+        //    Destroy(spiderRed);
+        //}
 
     }
 

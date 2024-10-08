@@ -51,7 +51,7 @@ public class FollowTarget : MonoBehaviour
     {
         Follow();
         IsMoving();
-        LeftBehind();
+        //LeftBehind();
     }
 
     private void IsMoving()
@@ -92,13 +92,7 @@ public class FollowTarget : MonoBehaviour
         {           
             return false;
         }
-        else
-        {            
-            return true; 
-        }
+
+        return true;
     }
-
-    
-
- 
 }

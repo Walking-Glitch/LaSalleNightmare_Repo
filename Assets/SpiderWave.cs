@@ -9,7 +9,7 @@ public class SpiderWave : MonoBehaviour
     public GameObject spiderPrefabBlack;
 
     public Transform spawnPoint;
-    public GameObject zone;
+  
 
     private int maxBlackSpiders = 8, maxPurpleSpiders = 10, maxRedSpiders = 5;
     public int BlackSpidersAlive, RedSpidersAlive, PurpleSpidersAlive, TotalSpidersAlive;

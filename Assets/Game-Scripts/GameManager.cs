@@ -6,11 +6,47 @@ public class GameManager : MonoBehaviour
 {
  private GameObject map;
 
+ #region References
+
+ public SpiderPool  SpiderPool;
+ public SpiderManager SpiderManager;
+ public Death Death;
+ public ThirdPersonMoving Player;
+ public ScreenDamage ScreenDamage;
+
+    #endregion
+
+    #region Singleton
+
+    private static GameManager instance;
+
+ private GameManager() { }
+
+ public static GameManager Instance
+ {
+     get
+     {
+         if (instance is null)
+             Debug.LogError("Game Manager is Null");
+         return instance;
+     }
+
+ }
+    #endregion
+    void Awake()
+    {
+        instance = this;
+    }
+
     //Start is called before the first frame update
     void Start()
     {
         map = GameObject.Find("MapCamera");
-        map.SetActive(false); 
+        if (map != null)
+        {
+            map.SetActive(false);
+        }
+       
     }
 
     // Update is called once per frame

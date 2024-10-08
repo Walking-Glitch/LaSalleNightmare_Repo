@@ -378,23 +378,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &-3202367597359323000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8490864532421093919}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6a9abb20cb634498183ef6726b0751, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startSpeed: 10
-  speed: 10
-  starHealth: 100
-  DeathEffect: {fileID: 1440847086223425093, guid: 93146bea291e61440bc48a4dc2ebb664,
-    type: 3}
 --- !u!114 &1905784579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -407,10 +390,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cfd76ad5fb061740af21daa5e0cf2fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  screen: {fileID: 0}
   death: {fileID: 0}
   damage: 2
   spiderBite: {fileID: 137275935854939549}
-  timeValue: 5
   spiderPurp: {fileID: 8490864532421093919}
   isBiting: 0
 --- !u!114 &1910953168
