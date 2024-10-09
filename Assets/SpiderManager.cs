@@ -9,7 +9,7 @@ public class SpiderManager : MonoBehaviour
 
     [SerializeField] private List<Transform> spawnPointsList = new List<Transform>();
 
-    public int enemyCtr = 0;
+    public int enemyCtr;
     public int maxEnemy;
     public float delay;
 
@@ -24,14 +24,15 @@ public class SpiderManager : MonoBehaviour
     void Start()
     {
         gameManager = GameManager.Instance;
-        //CollectChildObjects(parentSpawnPoint);
+        enemyCtr = 0;
+    
     }
     // Update is called once per frame
     void Update()
     {
-        if (enable && !isSpawning && enemyCtr < maxEnemy)
+        if (enable && enemyCtr < maxEnemy)
         {
-            StartCoroutine(SpawnSpiders());
+            if(!isSpawning) StartCoroutine(SpawnSpiders());
         }
     }
     private IEnumerator SpawnSpiders()
@@ -43,6 +44,7 @@ public class SpiderManager : MonoBehaviour
         tempEnemy.transform.rotation = spawnPoint.rotation;
         tempEnemy.GetComponent<NavMeshAgent>().enabled = true;
         tempEnemy.SetActive(true);
+
         enemyCtr++;
 
         yield return new WaitForSeconds(delay);

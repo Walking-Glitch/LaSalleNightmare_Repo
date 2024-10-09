@@ -24,6 +24,7 @@ public class SpiderPool : MonoBehaviour
                 GameObject spider = Instantiate(spiderPrefab);
                 spider.SetActive(false);
                 SpiderList.Add(spider);
+                spider.transform.parent = transform;
             }
             else if ((i + 1) % 3 == 0)
             {
@@ -31,6 +32,7 @@ public class SpiderPool : MonoBehaviour
                 GameObject spider = Instantiate(spiderPrefab);
                 spider.SetActive(false);
                 SpiderList.Add(spider);
+                spider.transform.parent = transform;
             }
             else
             {
@@ -38,6 +40,7 @@ public class SpiderPool : MonoBehaviour
                 GameObject spider = Instantiate(spiderPrefab);
                 spider.SetActive(false);
                 SpiderList.Add(spider);
+                spider.transform.parent = transform;
             }
 
         }
@@ -50,7 +53,6 @@ public class SpiderPool : MonoBehaviour
         {
             if (!SpiderList[i].activeSelf)
             {
-                //EnemyList[i].SetActive(true);
                 SpiderList[i].GetComponent<NavMeshAgent>().enabled = false;
                 return SpiderList[i];
             }

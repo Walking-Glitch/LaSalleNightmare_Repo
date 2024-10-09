@@ -10,12 +10,12 @@ TagManager:
   - CinemachineTarget
   - Ground
   - Target
-  - Spider1
-  - Spider2
-  - Spider3
   - SpawnPoint
   - Death
   - CheckPoint
+  - Spider
+  - Spider1
+  - Spider2
   layers:
   - Default
   - TransparentFX

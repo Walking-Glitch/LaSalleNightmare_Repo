@@ -423,28 +423,28 @@ public class ThirdPersonMoving : MonoBehaviour
                 //Debug.DrawRay(Input.mousePosition, transform.forward * hit.distance, Color.green);
 
 
-                if (hit.collider.CompareTag("Spider1"))
+                if (hit.collider.CompareTag("Spider"))
                 {
-                    hit.collider.gameObject.GetComponent<SpiderPurp_Behavior>().SpiderHit();
+                    hit.collider.gameObject.GetComponent<Spider_Base>().SpiderHit();
                     ShotEffects(hit);
 
 
                 }
 
-                else if (hit.collider.CompareTag("Spider2"))
-                {
-                    hit.collider.gameObject.GetComponent<SpiderRed_Behavior>().SpiderHit();
-                    ShotEffects(hit);
+                //else if (hit.collider.CompareTag("Spider2"))
+                //{
+                //    hit.collider.gameObject.GetComponent<SpiderRed_Behavior>().SpiderHit();
+                //    ShotEffects(hit);
 
-                }
+                //}
 
-                else if (hit.collider.CompareTag("Spider3"))
-                {
-                    hit.collider.gameObject.GetComponent<SpiderBlack_Behavior>().SpiderHit();
-                    ShotEffects(hit);
+                //else if (hit.collider.CompareTag("Spider3"))
+                //{
+                //    hit.collider.gameObject.GetComponent<SpiderBlack_Behavior>().SpiderHit();
+                //    ShotEffects(hit);
 
 
-                }
+                //}
 
                 else if (hit.collider.CompareTag("Ground"))
                 {

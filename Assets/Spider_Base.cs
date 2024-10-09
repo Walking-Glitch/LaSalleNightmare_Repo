@@ -14,7 +14,7 @@ public class Spider_Base : MonoBehaviour
 
     public FollowTarget followTarget;
 
-    public int damage = 2;
+    protected int damage;
 
     // spider sounds
 
@@ -22,15 +22,14 @@ public class Spider_Base : MonoBehaviour
 
     // TIMER
 
-    private float timeValue = 4;
-    [SerializeField] private GameObject spiderBlack;
+   [SerializeField] protected float timeValue;
 
 
     protected Animator anim;
-    
-    
-    
-    protected bool isDead;
+
+
+
+    public bool isDead;
     public bool isBiting;
 
     private GameManager gameManager;
@@ -48,14 +47,30 @@ public class Spider_Base : MonoBehaviour
     protected float navSpeed;
     protected int avPriority;
 
-    protected 
+      
 
     // Start is called before the first frame update
 
-    void OnEnable()
+    protected virtual void Awake()
     {
+        navSpider = GetComponent<NavMeshAgent>();
+        sphereCollider = GetComponent<SphereCollider>();
+        boxColliderTrigger = GetComponent<BoxCollider>();
+    }
+    protected virtual void OnEnable()
+    {
+        damage = 2;
         timeValue = 4;
-        isDead = false;
+
+        navSpider.isStopped = false;
+        sphereCollider.enabled = true;
+        boxColliderTrigger.enabled = true;
+    }
+
+    protected virtual void OnDisable()
+    {
+       
+        //  Debug.Log(gameObject.name + " has been deactivated!");
     }
     protected virtual void Start()
     {
@@ -66,30 +81,24 @@ public class Spider_Base : MonoBehaviour
 
         // Setting components with desire values 
         // boxColliderTrigger is for recognize the player 
-        boxColliderTrigger = GetComponent<BoxCollider>();
         SetBoxColliderPosition(boxColliderTrigger, boxCenterVector, boxSizeVector, true);
         
         // sphereCollider is to push the player 
-        sphereCollider = GetComponent<SphereCollider>();
         SetSphereCollidersPosition(sphereCollider, SphCenterVector, SphRadius);
 
         // anim control
-
         anim = GetComponent<Animator>();
 
         //Nav
-
-        navSpider = GetComponent<NavMeshAgent>();
-
-        SetNavAgentParameteres(navSpider, navRadius, navSpeed, avPriority);
- 
-
+        SetNavAgentParameters(navSpider, navRadius, navSpeed, avPriority);
+        
         InvokeRepeating(nameof(IsAttacking), 1f, 1f);
 
     }
 
-    private void Update()
+    protected virtual void Update()
     {
+        
         DeadSpiderTimer();
         AdjustMovingSphereCollider(new Vector3(0 ,0.5f, 0.1f));
     }
@@ -107,7 +116,7 @@ public class Spider_Base : MonoBehaviour
         boxCollider.size = size;
     }
 
-    protected virtual void SetNavAgentParameteres(NavMeshAgent navSpider,float radius,float speed, int avPriority)
+    protected virtual void SetNavAgentParameters(NavMeshAgent navSpider,float radius,float speed, int avPriority)
     {
         navSpider.radius = radius;
         navSpider.speed = speed;
@@ -136,9 +145,9 @@ public class Spider_Base : MonoBehaviour
 
     private void DeadSpiderTimer()
     {
-        // Is dead becomes true when the spider is hit and checks if the timeValue >0
-        // then subtracts one unit every frame and destroy the object from the heirarchy
-        if (isDead && timeValue > 0)
+        
+         
+        if (isDead && timeValue >= 0)
         {
             timeValue -= Time.deltaTime;
             //Debug.Log(timeValue);
@@ -146,17 +155,21 @@ public class Spider_Base : MonoBehaviour
         }
         else if (isDead && timeValue <= 0)
         {
+          
+            isDead = false;
             gameManager.SpiderManager.DecreaseEnemyCtr();
             gameObject.SetActive(false);
         }
 
         else if (followTarget.LeftBehind())
         {
+            isDead = false;
+            gameManager.SpiderManager.DecreaseEnemyCtr();
+            Debug.Log(gameObject.name + " ;eft behind!");
             gameObject.SetActive(false);
         }
 
     }
-
 
     public void SpiderHit()
     {
@@ -167,6 +180,7 @@ public class Spider_Base : MonoBehaviour
         isDead = true;
 
 
+        Debug.Log("isDead set to: " + isDead);
     }
 
     private void OnTriggerEnter(Collider other)

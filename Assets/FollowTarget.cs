@@ -51,7 +51,7 @@ public class FollowTarget : MonoBehaviour
     {
         Follow();
         IsMoving();
-        //LeftBehind();
+        LeftBehind();
     }
 
     private void IsMoving()
@@ -88,7 +88,7 @@ public class FollowTarget : MonoBehaviour
 
     public bool LeftBehind()
     {
-        if (Vector3.Distance(lastPosition, target.position) < 50f)
+        if (Vector3.Distance(lastPosition, target.position) < 80f)
         {           
             return false;
         }

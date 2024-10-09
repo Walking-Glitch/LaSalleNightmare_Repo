@@ -220,7 +220,7 @@ PrefabInstance:
     - target: {fileID: 8672787908860700878, guid: d7aa467cc2d06614c81778313afa4825,
         type: 3}
       propertyPath: m_TagString
-      value: Spider3
+      value: Spider
       objectReference: {fileID: 0}
     - target: {fileID: 8672787908860998894, guid: d7aa467cc2d06614c81778313afa4825,
         type: 3}
@@ -477,7 +477,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   screen: {fileID: 0}
   death: {fileID: 0}
-  damage: 1
+  followTarget: {fileID: 0}
   spiderBite: {fileID: 3885028348740714620}
   spiderBlack: {fileID: 8490864532421093919}
   isBiting: 0

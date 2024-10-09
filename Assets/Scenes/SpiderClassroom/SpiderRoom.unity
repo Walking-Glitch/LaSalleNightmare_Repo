@@ -19211,7 +19211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPointsList: []
   enemyCtr: 0
-  maxEnemy: 1
+  maxEnemy: 24
   delay: 0.2
   spawnPoint: {fileID: 0}
   zone: {fileID: 0}
@@ -20634,9 +20634,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spiderPrefabs:
   - {fileID: 8490864532421093919, guid: 8e7acdfd206b1524e93d6650c37beb28, type: 3}
-  - {fileID: 8490864532421093919, guid: 8e7acdfd206b1524e93d6650c37beb28, type: 3}
-  - {fileID: 8490864532421093919, guid: 8e7acdfd206b1524e93d6650c37beb28, type: 3}
-  poolSize: 15
+  - {fileID: 8490864532421093919, guid: 11de5f16cccefc04380504500a6a6153, type: 3}
+  - {fileID: 8490864532421093919, guid: 745a81a5aa233bd49ada2211fbda58af, type: 3}
+  poolSize: 24
   SpiderList: []
 --- !u!4 &1655981298
 Transform:
@@ -23047,7 +23047,7 @@ PrefabInstance:
     - target: {fileID: 8209362356568989228, guid: 9e7bff22860530648b5cc0eda952c478,
         type: 3}
       propertyPath: m_Lens.m_SensorSize.x
-      value: 1.9237435
+      value: 2.059369
       objectReference: {fileID: 0}
     - target: {fileID: 8209362356568989229, guid: 9e7bff22860530648b5cc0eda952c478,
         type: 3}
@@ -25330,7 +25330,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 19.300049, y: -19.89004}
+  m_AnchoredPosition: {x: 19.30011, y: -19.89004}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &2083575844
