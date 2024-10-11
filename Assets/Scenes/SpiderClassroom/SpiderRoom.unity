@@ -19212,7 +19212,7 @@ MonoBehaviour:
   spawnPointsList: []
   enemyCtr: 0
   maxEnemy: 24
-  delay: 0.2
+  delay: 1
   spawnPoint: {fileID: 0}
   zone: {fileID: 0}
   enable: 0
