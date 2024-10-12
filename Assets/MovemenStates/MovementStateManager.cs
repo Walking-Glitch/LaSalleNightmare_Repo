@@ -33,7 +33,7 @@ public class MovementStateManager : MonoBehaviour
 
     void Start()
     {
-        anim = GetComponentInChildren<Animator>();
+        anim = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
         SwitchState(Idle);
     }
