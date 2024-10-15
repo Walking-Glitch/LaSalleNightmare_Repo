@@ -944,7 +944,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 929657825}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.002, y: 0.068, z: 0.665}
+  m_LocalPosition: {x: 0.004, y: 0.039, z: 0.703}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -997,7 +997,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.1260684, y: 1}
+    m_SensorSize: {x: 2.6875, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1047,7 +1047,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1094419196}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1566,6 +1566,7 @@ GameObject:
   - component: {fileID: 2057633470}
   - component: {fileID: 2057633476}
   - component: {fileID: 2057633477}
+  - component: {fileID: 2057633479}
   - component: {fileID: 2057633478}
   m_Layer: 9
   m_Name: Player
@@ -1700,6 +1701,23 @@ MonoBehaviour:
   - m_Rig: {fileID: 2074736525}
     m_Active: 1
   m_Effectors: []
+--- !u!114 &2057633479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2057633469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d428218c032fa3f4ead9c252512aa18e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentWeapon: {fileID: 7349521830305979982}
+  ammo: {fileID: 0}
+  anim: {fileID: 0}
+  rHandAim: {fileID: 767669517}
+  lHandAim: {fileID: 1281505578}
 --- !u!1 &2074736524
 GameObject:
   m_ObjectHideFlags: 0
@@ -4431,6 +4449,7 @@ GameObject:
   - component: {fileID: 7349521830308207740}
   - component: {fileID: 7349521830308207741}
   - component: {fileID: 7349521830308207742}
+  - component: {fileID: 7349521830308207743}
   m_Layer: 9
   m_Name: WEAPON
   m_TagString: Untagged
@@ -4604,6 +4623,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7349521830308207743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7349521830305979982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b2fab3a07e706e44bd6f1d5276ad22b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clipSize: 30
+  extraAmmo: 500
+  currentAmmo: 0
+  magInClip: {fileID: 8300000, guid: f8a9cc0a747d2274f95864f5b73c97c6, type: 3}
+  magOutClip: {fileID: 8300000, guid: f8a9cc0a747d2274f95864f5b73c97c6, type: 3}
+  releaseSlideClip: {fileID: 8300000, guid: 4d883caefd446524091fa962ecf36e77, type: 3}
 --- !u!4 &7358631408512290866
 Transform:
   m_ObjectHideFlags: 0
