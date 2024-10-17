@@ -32,7 +32,8 @@ public class AimStateManager : MonoBehaviour
     [SerializeField] private float crouchMovingCamHeight;
     [SerializeField] private float shoulderSwapSpeed = 10f;
 
-    private MovementStateManager moving;
+    public MovementStateManager moving;
+    public bool isAiming;
 
     private float zFollowPos;
     private float originalZPos, zoomedZPos = 0f;
@@ -56,6 +57,7 @@ public class AimStateManager : MonoBehaviour
         xAxis += Input.GetAxisRaw("Mouse X") * mouseSense;
         yAxis += Input.GetAxisRaw("Mouse Y") * mouseSense *-1;
         yAxis = Mathf.Clamp(yAxis, -80, 80);
+       // xAxis = Mathf.Clamp(xAxis, -180, 180);
 
         vCam.m_Lens.FieldOfView = Mathf.Lerp(vCam.m_Lens.FieldOfView, currentFov, fovSmoothSpeed);
 

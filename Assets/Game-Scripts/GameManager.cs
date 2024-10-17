@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
  public SpiderPool  SpiderPool;
  public SpiderManager SpiderManager;
  public Death Death;
- public ThirdPersonMoving Player;
+ public PlayerBehavior Player;
  public ScreenDamage ScreenDamage;
 
     #endregion

@@ -26,6 +26,7 @@ public class WeaponManager : MonoBehaviour
     private WeaponBloom bloom;
     private ActionStateManager actions;
     private WeaponRecoil recoil;
+    private MovementStateManager movement;
 
     private Light muzzleFlashLight;
     ParticleSystem muzzleFlashParticleSystem;
@@ -34,6 +35,7 @@ public class WeaponManager : MonoBehaviour
 
     void Start()
     {
+        movement = GetComponentInParent<MovementStateManager>();
         audioSource = GetComponent<AudioSource>();
         aim = GetComponentInParent<AimStateManager>();
         ammo = GetComponent<WeaponAmmo>();
@@ -63,6 +65,7 @@ public class WeaponManager : MonoBehaviour
         fireRateTimer += Time.deltaTime;
         if (fireRateTimer < fireRate) return false;
         if (ammo.currentAmmo == 0) return false;
+        if (movement.isRunning) return false;
         if (actions.currentState == actions.Reload) return false;
         if (semiAuto && Input.GetKeyDown(KeyCode.Mouse0)) return true;
         if (!semiAuto && Input.GetKey(KeyCode.Mouse0)) return true;

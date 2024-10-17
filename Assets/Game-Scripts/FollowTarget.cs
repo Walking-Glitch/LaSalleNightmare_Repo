@@ -32,8 +32,8 @@ public class FollowTarget : MonoBehaviour
 
     void Start()
     {
-        target = GameObject.Find("Third Person Player 1.4").transform;
-        
+        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+
         myTransform = transform;
         lastPosition = myTransform.position;
         isMoving = false;

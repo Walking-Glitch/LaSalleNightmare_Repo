@@ -6,7 +6,7 @@ using UnityEngine.Animations.Rigging;
 
 public class ActionStateManager : MonoBehaviour
 {
-    [HideInInspector]public ActionBaseState currentState;
+    [HideInInspector] public ActionBaseState currentState;
 
     public ReloadState Reload = new ReloadState();
     public DefaultState Default = new DefaultState();
@@ -21,10 +21,13 @@ public class ActionStateManager : MonoBehaviour
 
 
     private AudioSource audioSource;
+
+    public MovementStateManager moving;
  
     void Start()
     {
         SwitchState(Default);
+        moving = GetComponent<MovementStateManager>();
         ammo = currentWeapon.GetComponent<WeaponAmmo>();
         audioSource = currentWeapon.GetComponent<AudioSource>();
         anim = GetComponent<Animator>();

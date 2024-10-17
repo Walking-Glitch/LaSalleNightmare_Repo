@@ -141,7 +141,7 @@ public class Death : MonoBehaviour
 
     public void TimeModifier()
     {
-        if (gameObject.GetComponent<ThirdPersonMoving>().kills % bonus == 0 && gameObject.GetComponent<ThirdPersonMoving>().kills != 0)
+        if (gameObject.GetComponent<PlayerBehavior>().kills % bonus == 0 && gameObject.GetComponent<PlayerBehavior>().kills != 0)
         {
             timeValue += bonus;
 

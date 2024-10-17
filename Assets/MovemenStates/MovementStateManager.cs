@@ -10,6 +10,8 @@ public class MovementStateManager : MonoBehaviour
     public float runSpeed = 7, runBackSpeed = 5;
     public float crouchSpeed = 2, crouchBackSpeed = 1;
 
+    public bool isRunning;
+
     [HideInInspector] public Vector3 direction;
     [HideInInspector] public float hInput, vInput;
 
@@ -20,20 +22,30 @@ public class MovementStateManager : MonoBehaviour
     [SerializeField]CharacterController characterController;
 
     [SerializeField] private float gravity = -9.81f;
+    [SerializeField] private float jumpForce;
+    public bool jumped; 
     private Vector3 velocity;
 
+    public MovementBaseState previousState;
     public MovementBaseState currentState;
 
     public IdleState Idle = new IdleState();
     public WalkState Walk = new WalkState();
     public CrouchState Crouch = new CrouchState();
     public RunState Run = new RunState();
+    public JumpState Jump = new JumpState();
 
     [HideInInspector] public Animator anim;
 
+    public AimStateManager aim;
+
+    public ActionStateManager action;
+
     void Start()
     {
+        action = GetComponent<ActionStateManager>();
         anim = GetComponent<Animator>();
+        aim = GetComponent<AimStateManager>();
         characterController = GetComponent<CharacterController>();
         SwitchState(Idle);
     }
@@ -43,6 +55,7 @@ public class MovementStateManager : MonoBehaviour
     {
         GetDirectionAndMove();
         Gravity();
+        Falling();
 
         anim.SetFloat("hInput", hInput);
         anim.SetFloat("vInput", vInput);
@@ -67,7 +80,7 @@ public class MovementStateManager : MonoBehaviour
         characterController.Move(direction.normalized * currentMoveSpeed * Time.deltaTime);
     }
 
-    bool IsGrounded()
+    public bool IsGrounded()
     {
         spherePos = new Vector3(transform.position.x, transform.position.y - groundYoffSet, transform.position.z);
 
@@ -91,6 +104,21 @@ public class MovementStateManager : MonoBehaviour
 
         characterController.Move(velocity * Time.deltaTime);
     }
+
+    public void Falling()
+    {
+        anim.SetBool("Falling", !IsGrounded());
+    }
+    public void JumpForce()
+    {
+        velocity.y += jumpForce;
+    }
+
+    public void Jumped()
+    {
+        jumped = true; 
+    }
+
 
     void OnDrawGizmos()
     {
