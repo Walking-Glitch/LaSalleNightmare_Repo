@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 513583704749555495}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 43.81, y: 2.78, z: 45.48}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -229,7 +229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToDestroy: 2
-  splashGround: {fileID: 8300000, guid: 6888e3d5f54ad6f45b519c53058869f4, type: 3}
+  splashGround: {fileID: 8300000, guid: f624da56fae914f44b2e851088907998, type: 3}
   bloodSplashSound: {fileID: 8300000, guid: f624da56fae914f44b2e851088907998, type: 3}
   txtKills: {fileID: 0}
   kills: 0

@@ -63,8 +63,6 @@ public class bullet : MonoBehaviour
              
             AudioSource.PlayClipAtPoint(splashGround, contact.point);
 
-
-
         }
 
         Destroy(this.gameObject);

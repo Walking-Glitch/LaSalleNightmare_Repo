@@ -31,7 +31,11 @@ public class WeaponManager : MonoBehaviour
     private Light muzzleFlashLight;
     ParticleSystem muzzleFlashParticleSystem;
     private float lightIntensity;
-    [SerializeField] private float lightReturnSpeed = 20; 
+    [SerializeField] private float lightReturnSpeed = 20;
+
+    [SerializeField] private float xAdjustment;
+    public LayerMask aimMask;
+    public GameObject cameraAdjustment;
 
     void Start()
     {
@@ -83,16 +87,37 @@ public class WeaponManager : MonoBehaviour
         ammo.currentAmmo--;
         for (int i = 0; i < bulletsPershot; i++)
         {
-            GameObject currenBullet = Instantiate(bullet, barrelPos.position, barrelPos.rotation);
+            
+            Vector2 screenCentre = new Vector2(Screen.width / 2, Screen.height / 2);
+            Ray ray = Camera.main.ScreenPointToRay(screenCentre);
+
+            Vector3 shootingDirection = (ray.direction).normalized;
+
+            // Set the ray origin to the camera adjustment's position
+            RaycastHit hit;
+            // Does the ray intersect any objects excluding the player layer
+            if (Physics.Raycast(cameraAdjustment.transform.position, shootingDirection, out hit, Mathf.Infinity, aimMask))
+            {
+                shootingDirection = (hit.point - barrelPos.position).normalized;
+                Debug.DrawRay(cameraAdjustment.transform.position, shootingDirection * hit.distance, Color.yellow);
+                Debug.Log("Did Hit");
+            }
+            
+            
+            GameObject currenBullet = Instantiate(bullet, barrelPos.position, Quaternion.LookRotation(shootingDirection));
             Rigidbody rb = currenBullet.GetComponent<Rigidbody>();
-            rb.AddForce(barrelPos.forward * bulletVelocity, ForceMode.Impulse);
+
+           
+            rb.AddForce(shootingDirection * bulletVelocity, ForceMode.Impulse);
         }
+
+
     }
+
 
     void TriggerMuzzleFlash()
-    {
-        muzzleFlashParticleSystem.Play();
-        muzzleFlashLight.intensity = lightIntensity;
-
-    }
+        {
+            muzzleFlashParticleSystem.Play();
+            muzzleFlashLight.intensity = lightIntensity;
+        }
 }

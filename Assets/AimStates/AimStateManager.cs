@@ -57,7 +57,7 @@ public class AimStateManager : MonoBehaviour
         xAxis += Input.GetAxisRaw("Mouse X") * mouseSense;
         yAxis += Input.GetAxisRaw("Mouse Y") * mouseSense *-1;
         yAxis = Mathf.Clamp(yAxis, -80, 80);
-       // xAxis = Mathf.Clamp(xAxis, -180, 180);
+       
 
         vCam.m_Lens.FieldOfView = Mathf.Lerp(vCam.m_Lens.FieldOfView, currentFov, fovSmoothSpeed);
 
@@ -77,9 +77,19 @@ public class AimStateManager : MonoBehaviour
 
     void LateUpdate()
     {
-        camFollowPos.localEulerAngles =
-            new Vector3(yAxis, camFollowPos.localEulerAngles.y, camFollowPos.localEulerAngles.z);
-        transform.eulerAngles = new Vector3(transform.eulerAngles.x, xAxis, transform.eulerAngles.z);
+        if(PauseMenu2.isPaused || WinMenu.gamePaused)
+        {
+            return;
+        }
+        else
+        {
+            camFollowPos.localEulerAngles =
+                new Vector3(yAxis, camFollowPos.localEulerAngles.y, camFollowPos.localEulerAngles.z);
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, xAxis, transform.eulerAngles.z);
+        }
+
+      
+
     }
 
     public void SwitchState(AimBaseState state)

@@ -29,20 +29,12 @@ public class PlayerBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
+     
     }
     void RefreshDisplay()
     {
         txtKills.text = preText1 + kills.ToString();
         gameObject.GetComponent<Death>().TimeModifier();
     }
-    public void Move()
-    {
-
-        if (PauseMenu2.isPaused || WinMenu.gamePaused) { return; }
-        
-
-    }
-    
 
 }
