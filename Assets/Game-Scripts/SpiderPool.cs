@@ -56,7 +56,6 @@ public class SpiderPool : MonoBehaviour
                 SpiderList[i].GetComponent<NavMeshAgent>().enabled = false;
                 return SpiderList[i];
             }
-
         }
         return null;
 

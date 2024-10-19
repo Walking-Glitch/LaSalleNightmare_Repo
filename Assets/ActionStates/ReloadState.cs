@@ -8,6 +8,8 @@ public class ReloadState : ActionBaseState
     {
         Debug.Log("asdadsadsad");
 
+        action.audioSource.volume = 0.8f;
+
         action.rHandAim.weight = 0f;
         action.lHandAim.weight = 0f;
         action.anim.SetTrigger("Reload");

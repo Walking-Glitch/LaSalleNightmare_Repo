@@ -12,22 +12,19 @@ public class bullet : MonoBehaviour
     public AudioClip splashGround;
     public AudioClip bloodSplashSound;
 
-    // killed spiders counter
-    [SerializeField] private Text txtKills;
-    [SerializeField] public int kills = 0;
-    const string preText1 = "SPIDERS KILLED: ";
-
     // particle system shooting effects
     [SerializeField] private GameObject water;
     [SerializeField] private GameObject spBlood;
-    [SerializeField] private Canvas aimCanvas;
+    
+
+    private GameManager gameManager;
 
     private float timer;
 
     // Start is called before the first frame update
     void Start()
     {
-      
+      gameManager = GameManager.Instance;
     }
 
     // Update is called once per frame
@@ -36,7 +33,7 @@ public class bullet : MonoBehaviour
         timer += Time.deltaTime;
         if (timer >= timeToDestroy)
         {
-            Destroy(this.gameObject);
+            gameObject.SetActive(false);
         }
     }
 
@@ -47,6 +44,10 @@ public class bullet : MonoBehaviour
         {
             collision.collider.gameObject.GetComponent<Spider_Base>().SpiderHit();
             ShotEffects(collision);
+
+           
+            gameManager.Player.RefreshDisplay(gameManager.Player.kills);
+            Debug.Log(gameManager.Player.kills);
         }
 
 
@@ -65,12 +66,11 @@ public class bullet : MonoBehaviour
 
         }
 
-        Destroy(this.gameObject);
+        gameObject.SetActive(false);
     }
 
     private void ShotEffects(Collision collision)
     {
-
         ContactPoint contact = collision.contacts[0];
         Transform objectHit = contact.otherCollider.transform;
         Quaternion rotation = Quaternion.LookRotation(contact.normal);
@@ -79,9 +79,14 @@ public class bullet : MonoBehaviour
         copy.transform.parent = objectHit;
 
         AudioSource.PlayClipAtPoint(bloodSplashSound, contact.point);
-
-
-        kills++;
-        //RefreshDisplay();
+        gameManager.Player.kills++;
     }
+
+    private void OnDisable()
+    {
+        timer = 0;
+        //GetComponent<Rigidbody>().velocity = Vector3.zero;
+        //GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+    }
+
 }

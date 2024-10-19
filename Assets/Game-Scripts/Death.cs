@@ -43,6 +43,7 @@ public class Death : MonoBehaviour
     //Audio Source
     public AudioSource audioSource;
     public AudioClip respawnSound;
+    public AudioClip CheckPointSound;
     #region Singleton 
     private Death() { }
     public static Death GetInstance()
@@ -195,7 +196,7 @@ public class Death : MonoBehaviour
 
         if (other.CompareTag("CheckPoint"))
         {            
-            audioSource.PlayOneShot(audioSource.clip);
+            audioSource.PlayOneShot(CheckPointSound);
             other.gameObject.SetActive(false);
             Debug.Log("CHECKPOINT REACHED");
             originalPos = transform.position;

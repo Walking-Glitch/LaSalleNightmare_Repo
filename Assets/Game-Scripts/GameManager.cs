@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
  public Death Death;
  public PlayerBehavior Player;
  public ScreenDamage ScreenDamage;
-
+ public BulletPool BulletPool;
     #endregion
 
     #region Singleton

@@ -43,16 +43,9 @@ public class MiniManager : MonoBehaviour
     }
 
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    collectSound.Play();
-    //    score++;
-    //    trophyText.GetComponent<Text>().text = score.ToString();
-    //    Destroy(gameObject);
-    ////}
+    
     public void CompleteSpiders()
     {
-        //win.Pause();
-       // SceneManager.LoadScene("LoadingScene"); 
+        win.Pause();
     }
 }

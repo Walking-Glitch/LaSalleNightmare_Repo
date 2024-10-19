@@ -23,7 +23,7 @@ public class WinMenu : MonoBehaviour
 
     void Update()
     {
-        if (manager.score == 5)
+        if (manager.score == 10)
         {
             Cursor.lockState = CursorLockMode.None;
             if (gamePaused)

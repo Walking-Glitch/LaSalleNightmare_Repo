@@ -5,7 +5,7 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(SphereCollider))]
-[RequireComponent(typeof(BoxCollider))]
+
 public class Spider_Base : MonoBehaviour
 {
     public ScreenDamage screen;
@@ -25,15 +25,14 @@ public class Spider_Base : MonoBehaviour
    [SerializeField] protected float timeValue;
 
 
-    protected Animator anim;
-
-
+    public Animator anim;
 
     public bool isDead;
     public bool isBiting;
 
     private GameManager gameManager;
 
+    public GameObject boxCollideroGameObject;
     protected BoxCollider boxColliderTrigger;
     protected Vector3 boxCenterVector;
     protected Vector3 boxSizeVector;
@@ -46,8 +45,7 @@ public class Spider_Base : MonoBehaviour
     protected float navRadius;
     protected float navSpeed;
     protected int avPriority;
-
-      
+ 
 
     // Start is called before the first frame update
 
@@ -55,7 +53,7 @@ public class Spider_Base : MonoBehaviour
     {
         navSpider = GetComponent<NavMeshAgent>();
         sphereCollider = GetComponent<SphereCollider>();
-        boxColliderTrigger = GetComponent<BoxCollider>();
+        boxColliderTrigger = boxCollideroGameObject.GetComponent<BoxCollider>();
     }
     protected virtual void OnEnable()
     {
@@ -67,11 +65,6 @@ public class Spider_Base : MonoBehaviour
         boxColliderTrigger.enabled = true;
     }
 
-    protected virtual void OnDisable()
-    {
-       
-        //  Debug.Log(gameObject.name + " has been deactivated!");
-    }
     protected virtual void Start()
     {
         gameManager = GameManager.Instance;
@@ -91,14 +84,10 @@ public class Spider_Base : MonoBehaviour
 
         //Nav
         SetNavAgentParameters(navSpider, navRadius, navSpeed, avPriority);
-        
-        InvokeRepeating(nameof(IsAttacking), 1f, 1f);
-
     }
 
     protected virtual void Update()
     {
-        
         DeadSpiderTimer();
         AdjustMovingSphereCollider(new Vector3(0 ,0.5f, 0.1f));
     }
@@ -133,13 +122,15 @@ public class Spider_Base : MonoBehaviour
         else { SetSphereCollidersPosition(sphereCollider, SphCenterVector, SphRadius); }
     }
 
-    private void IsAttacking()
+    protected void IsAttacking()
     {
         if (isBiting)
         {
             death.health -= damage;
+            spiderBite.PlayOneShot(spiderBite.clip);
             death.RefreshDisplay();
             screen.VisualDamage();
+            
         }
     }
 
@@ -165,10 +156,9 @@ public class Spider_Base : MonoBehaviour
         {
             isDead = false;
             gameManager.SpiderManager.DecreaseEnemyCtr();
-            Debug.Log(gameObject.name + " ;eft behind!");
+            //Debug.Log(gameObject.name + " ;eft behind!");
             gameObject.SetActive(false);
         }
-
     }
 
     public void SpiderHit()
@@ -179,43 +169,6 @@ public class Spider_Base : MonoBehaviour
         boxColliderTrigger.enabled = false;
         isDead = true;
 
-
-        Debug.Log("isDead set to: " + isDead);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        // recognize if the player is touch 
-        if (other.CompareTag("Player"))
-        {
-            death.health -= damage;
-            death.RefreshDisplay();
-            spiderBite.PlayOneShot(spiderBite.clip);
-            anim.SetTrigger("Bite");
-
-            // Debug.Log("BITE ATTACK!");
-        }
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-
-            isBiting = true;
-            anim.SetTrigger("Bite");
-            // Debug.Log("KEEP BITING!");
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        // recognize if the player is running away 
-        if (other.CompareTag("Player"))
-        {
-            isBiting = false;
-            // Debug.Log("FOLLOW PLAYER!");
-        }
     }
 
 }

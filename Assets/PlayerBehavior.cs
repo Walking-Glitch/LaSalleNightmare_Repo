@@ -15,6 +15,8 @@ public class PlayerBehavior : MonoBehaviour
  
     //[SerializeField] private Canvas aimCanvas;
 
+    private GameManager gameManager;
+
     private void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -22,8 +24,8 @@ public class PlayerBehavior : MonoBehaviour
     }
     private void Start()
     {
-         
-        RefreshDisplay();
+        gameManager = GameManager.Instance;
+        RefreshDisplay(0);
     }
 
     // Update is called once per frame
@@ -31,9 +33,9 @@ public class PlayerBehavior : MonoBehaviour
     {
      
     }
-    void RefreshDisplay()
+    public void RefreshDisplay(int x)
     {
-        txtKills.text = preText1 + kills.ToString();
+        txtKills.text = preText1 + x.ToString();
         gameObject.GetComponent<Death>().TimeModifier();
     }
 

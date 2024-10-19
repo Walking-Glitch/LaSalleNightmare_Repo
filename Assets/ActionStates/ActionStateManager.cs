@@ -19,8 +19,7 @@ public class ActionStateManager : MonoBehaviour
     public MultiAimConstraint rHandAim;
     public TwoBoneIKConstraint lHandAim;
 
-
-    private AudioSource audioSource;
+    public AudioSource audioSource;
 
     public MovementStateManager moving;
  
@@ -29,7 +28,7 @@ public class ActionStateManager : MonoBehaviour
         SwitchState(Default);
         moving = GetComponent<MovementStateManager>();
         ammo = currentWeapon.GetComponent<WeaponAmmo>();
-        audioSource = currentWeapon.GetComponent<AudioSource>();
+        //audioSource = currentWeapon.GetComponent<AudioSource>();
         anim = GetComponent<Animator>();
     }
 

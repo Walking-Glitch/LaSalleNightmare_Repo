@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class WeaponAmmo : MonoBehaviour
 {
     public int clipSize;
@@ -11,6 +12,8 @@ public class WeaponAmmo : MonoBehaviour
     public AudioClip magInClip;
     public AudioClip magOutClip;
     public AudioClip releaseSlideClip;
+
+    
 
     void Start()
     {
@@ -46,4 +49,7 @@ public class WeaponAmmo : MonoBehaviour
             }
         }
     }
+
+    
+
 }

@@ -155,6 +155,64 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e98a1426f371264099ba83b3b7c668b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1587156023326741327
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 713268256694945750}
+  - component: {fileID: 6620543214773214538}
+  - component: {fileID: 9164344176605131707}
+  m_Layer: 2
+  m_Name: Detection Area
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &713268256694945750
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1587156023326741327}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8490864532421064255}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6620543214773214538
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1587156023326741327}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 1.35, y: 1.39, z: 1.37}
+  m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &9164344176605131707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1587156023326741327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9f5c8a3a8b69a74eaa6664c8e2f18b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &976844515666936529
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -481,19 +539,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 976844515666936529}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &1910953169
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8490864532421093919}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 1.35, y: 1.39, z: 1.37}
-  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!135 &1910953170
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -620,8 +665,10 @@ MonoBehaviour:
   followTarget: {fileID: 0}
   spiderBite: {fileID: 137275935854939549}
   timeValue: 0
+  anim: {fileID: 0}
   isDead: 0
   isBiting: 0
+  boxCollideroGameObject: {fileID: 1587156023326741327}
 --- !u!114 &1910953168
 MonoBehaviour:
   m_ObjectHideFlags: 0

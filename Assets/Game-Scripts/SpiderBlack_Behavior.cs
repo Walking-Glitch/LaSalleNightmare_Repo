@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(SphereCollider))]
-[RequireComponent(typeof(BoxCollider))]
 public class SpiderBlack_Behavior : Spider_Base
 {
     
@@ -13,15 +12,20 @@ public class SpiderBlack_Behavior : Spider_Base
 
     protected override void OnEnable()
     {
-        base.OnEnable();
-         
+        damage = 2;
+        timeValue = 3;
+
+        navSpider.isStopped = false;
+        sphereCollider.enabled = true;
+        boxColliderTrigger.enabled = true;
+
     }
     protected override void Start()
     {
         boxSizeVector = new Vector3(1.5f, 1.5f, 1.5f);
         boxCenterVector = new Vector3(0f, 0.5f, 0f);
 
-        SphRadius = 0.35f;
+        SphRadius = 0.4f;
         SphCenterVector = new Vector3(0f, 0.5f, 0f);
 
         navRadius = 0.25f;

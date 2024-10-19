@@ -4,12 +4,16 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(SphereCollider))]
-[RequireComponent(typeof(BoxCollider))]
 public class SpiderRed_Behavior : Spider_Base
 {
     protected override void OnEnable()
     {
-        base.OnEnable();
+        damage = 7;
+        timeValue = 4;
+
+        navSpider.isStopped = false;
+        sphereCollider.enabled = true;
+        boxColliderTrigger.enabled = true;
     }
 
     // Start is called before the first frame update
@@ -19,7 +23,7 @@ public class SpiderRed_Behavior : Spider_Base
         boxSizeVector = new Vector3(1.5f, 1.5f, 1.5f);
         boxCenterVector = new Vector3(0f, 0.5f, 0f);
 
-        SphRadius = 0.35f;
+        SphRadius = 0.5f;
         SphCenterVector = new Vector3(0f, 0.5f, 0f);
 
         navRadius = 0.5f;
