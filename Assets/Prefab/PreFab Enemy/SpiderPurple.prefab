@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6838668862307045238
 Transform:
   m_ObjectHideFlags: 0
@@ -46,7 +46,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: a0d4b67649cda8a44aac4cf4c9d3ac68, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.1
+  m_Volume: 0.2
   m_Pitch: 0.81
   Loop: 0
   Mute: 0
@@ -55,9 +55,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 50
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -141,7 +141,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 50, y: 3, z: 55}
+  m_Size: {x: 50, y: 15, z: 55}
   m_Center: {x: 0, y: 0, z: 10}
 --- !u!114 &8900275225037391216
 MonoBehaviour:
@@ -663,6 +663,7 @@ MonoBehaviour:
   screen: {fileID: 0}
   death: {fileID: 0}
   followTarget: {fileID: 0}
+  damage: 0
   spiderBite: {fileID: 137275935854939549}
   timeValue: 0
   anim: {fileID: 0}

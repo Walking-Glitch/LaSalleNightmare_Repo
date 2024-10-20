@@ -103,7 +103,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 50, y: 3, z: 55}
+  m_Size: {x: 50, y: 15, z: 55}
   m_Center: {x: 0, y: 0, z: 10}
 --- !u!114 &2337081244757483905
 MonoBehaviour:
@@ -140,7 +140,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 50
   Pan2D: 0
-  rolloffMode: 2
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -748,6 +748,7 @@ MonoBehaviour:
   screen: {fileID: 0}
   death: {fileID: 0}
   followTarget: {fileID: 0}
+  damage: 0
   spiderBite: {fileID: 3885028348740714620}
   timeValue: 0
   anim: {fileID: 0}
