@@ -29,7 +29,7 @@ public class Death : MonoBehaviour
 
     //Losing by timer
 
-    public float timeValue = 180;
+    public float timeValue;
     public float penalty = 30f;
     public float bonus = 20f;
     public Text timerText;
@@ -44,6 +44,7 @@ public class Death : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip respawnSound;
     public AudioClip CheckPointSound;
+    public AudioClip bonusSound;
     #region Singleton 
     private Death() { }
     public static Death GetInstance()
@@ -159,6 +160,7 @@ public class Death : MonoBehaviour
     {
         bonusAnim.Play("BonusAnim"); 
         bonusAnim.SetBool("Bonus", true);
+        audioSource.PlayOneShot(bonusSound);
        // Debug.Log("+20 is workind"); 
     }
 

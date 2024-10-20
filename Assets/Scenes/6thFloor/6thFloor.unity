@@ -17883,6 +17883,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfd92d492fb33d94e926b30ff48184c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpiderPool: {fileID: 0}
+  SpiderManager: {fileID: 0}
+  Death: {fileID: 0}
+  Player: {fileID: 0}
+  ScreenDamage: {fileID: 0}
+  BulletPool: {fileID: 0}
 --- !u!4 &1512168091
 Transform:
   m_ObjectHideFlags: 0

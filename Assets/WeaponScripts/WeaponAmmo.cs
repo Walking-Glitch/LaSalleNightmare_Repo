@@ -13,11 +13,13 @@ public class WeaponAmmo : MonoBehaviour
     public AudioClip magOutClip;
     public AudioClip releaseSlideClip;
 
+    private WeaponManager weaponManager;
     
 
     void Start()
     {
         currentAmmo = clipSize;
+        weaponManager = GetComponent<WeaponManager>();
     }
 
     // Update is called once per frame
@@ -48,6 +50,9 @@ public class WeaponAmmo : MonoBehaviour
                 extraAmmo = 0;
             }
         }
+
+        weaponManager.RefreshDisplay(currentAmmo, extraAmmo);
+
     }
 
     

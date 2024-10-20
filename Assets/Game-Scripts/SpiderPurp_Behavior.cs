@@ -8,7 +8,7 @@ public class SpiderPurp_Behavior : Spider_Base
 {
     protected override void OnEnable()
     {
-        damage = 4;
+        damage = 5;
         timeValue = 3;
 
         navSpider.isStopped = false;
@@ -25,7 +25,7 @@ public class SpiderPurp_Behavior : Spider_Base
 
         navRadius = 0.35f;
 
-        navSpeed = 6.0f;
+        navSpeed = 6.5f;
 
         avPriority = 2;
 

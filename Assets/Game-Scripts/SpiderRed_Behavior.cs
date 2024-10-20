@@ -9,7 +9,7 @@ public class SpiderRed_Behavior : Spider_Base
     protected override void OnEnable()
     {
         damage = 7;
-        timeValue = 4;
+        timeValue = 3;
 
         navSpider.isStopped = false;
         sphereCollider.enabled = true;
@@ -27,7 +27,7 @@ public class SpiderRed_Behavior : Spider_Base
         SphCenterVector = new Vector3(0f, 0.5f, 0f);
 
         navRadius = 0.5f;
-        navSpeed = 4.5f;
+        navSpeed = 5f;
         avPriority = 3;
 
         base.Start();

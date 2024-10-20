@@ -14,7 +14,7 @@ public class Spider_Base : MonoBehaviour
 
     public FollowTarget followTarget;
 
-    protected int damage;
+    [SerializeField]protected int damage;
 
     // spider sounds
 

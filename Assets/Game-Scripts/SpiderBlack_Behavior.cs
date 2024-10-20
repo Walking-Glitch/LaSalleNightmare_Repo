@@ -12,8 +12,8 @@ public class SpiderBlack_Behavior : Spider_Base
 
     protected override void OnEnable()
     {
-        damage = 2;
-        timeValue = 3;
+        damage = 3;
+        timeValue = 2f;
 
         navSpider.isStopped = false;
         sphereCollider.enabled = true;
@@ -30,7 +30,7 @@ public class SpiderBlack_Behavior : Spider_Base
 
         navRadius = 0.25f;
 
-        navSpeed = 7.0f;
+        navSpeed = 7.5f;
 
         avPriority = 1;
 
